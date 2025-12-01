@@ -10,8 +10,7 @@ namespace AventCalendar
     {
         int result = 0;
         int currentPosition = 50;
-        const int minNum = 0;
-        const int maxNum = 100;
+        const int maxNum = 99;
         List<KeyValuePair<char, int>> rotations = new List<KeyValuePair<char, int>>();
 
 
@@ -33,31 +32,22 @@ namespace AventCalendar
             }
         }
 
-        private int Rotate(char direction, int distance)
+        private void Rotate(char direction, int distance)
         {
             currentPosition = direction == 'L' ? currentPosition - distance : currentPosition + distance;
 
             while (currentPosition > maxNum)
-                currentPosition -= maxNum;
-            while (currentPosition < minNum)
-                currentPosition += maxNum;
+                currentPosition -= 100;
+            while (currentPosition < 0)
+                currentPosition += 100;
 
-            CheckHundred();
             CheckResult();
-
-            return currentPosition;
         }
 
         private void CheckResult() 
         {
-            if (currentPosition == minNum)
+            if (currentPosition == 0)
                 result += 1;
-        }
-        private int CheckHundred()
-        {
-            if (currentPosition == maxNum)
-                 currentPosition = 0;
-            return currentPosition;
         }
 
         private List<KeyValuePair<char, int>> GetRotations()

@@ -1,16 +1,23 @@
-﻿namespace AdventCalendar
+﻿using System.Text.RegularExpressions;
+
+namespace AdventCalendar
 {
     internal class Day2
     {
         List<(long start, long end)> ranges = new();
+        List<long> repeatedNumsTwice = new();
         List<long> repeatedNums = new();
 
         public Day2()
         {
             FindInvalid();
+            FindInvalidWithRegex();
             var result = CountResult();
+            var resultRegex = CountResultForRegex();
+
 
             Console.WriteLine($"Result is {result}");
+            Console.WriteLine($"Result for regex is {resultRegex}");
         }
 
         private void FindInvalid()
@@ -35,13 +42,34 @@
                     var right = numStr.Substring(half, half);
 
                     if (left == right)
+                        repeatedNumsTwice.Add(num);
+                }
+            }
+        }
+
+        private void FindInvalidWithRegex()
+        {
+            ranges = GetRanges();
+            var pattern = new Regex(@"^(\d+)\1+$");
+
+            foreach (var range in ranges)
+            {
+                for (long num = range.start; num <= range.end; num++)
+                {
+                    var s = num.ToString();
+
+                    if (pattern.IsMatch(s))
                         repeatedNums.Add(num);
                 }
             }
         }
 
-
         private long CountResult()
+        {
+            var result = repeatedNumsTwice.Sum();
+            return result;
+        }
+        private long CountResultForRegex()
         {
             var result = repeatedNums.Sum();
             return result;

@@ -21,25 +21,25 @@
             {
                 var firstNum = range.start;
                 var lastNum = range.end;
-                
+
                 for (long num = firstNum; num <= lastNum; num++)
                 {
                     var numStr = num.ToString();
                     var length = numStr.Length;
+
+                    if (length % 2 != 0)
+                        continue;
+
                     var half = length / 2;
                     var left = numStr.Substring(0, half);
                     var right = numStr.Substring(half, half);
 
-                    if (length % 2 == 0)
-                    {
-                       if(left == right)
-                       {
-                            repeatedNums.Add(num);
-                       }
-                    }
+                    if (left == right)
+                        repeatedNums.Add(num);
                 }
             }
-        }   
+        }
+
 
         private long CountResult()
         {

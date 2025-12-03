@@ -8,11 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\batteries.txt" />
     <None Remove="Data\ranges.txt" />
     <None Remove="Data\rotations.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Data\batteries.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\ranges.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
